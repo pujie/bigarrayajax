@@ -28,6 +28,7 @@
                 }
                 process = function(dataitem){
                     console.log('Item',dataitem);
+                    $('#main').prepend('<div>'+dataitem.name+'</div>');
                 }
                 done = function(){
                     console.log('Done');
