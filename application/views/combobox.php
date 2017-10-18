@@ -12,7 +12,7 @@
             (function($){
                 process = function(str){
                     console.log(str);
-                    $('#result').append('<li>'+str+'</li>');
+                    $('#result').prepend('<li>'+str+'</li>');
                 }
                     var endTime = +new Date() + maxtime;
                     var maxtime = 200;
