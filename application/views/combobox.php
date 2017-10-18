@@ -14,11 +14,13 @@
                     console.log(str);
                     $('#result').prepend('<li>'+str+'</li>');
                 }
+                main = function(param){
+                    $('#result').empty();
                     var endTime = +new Date() + maxtime;
                     var maxtime = 200;
                     $.ajax({
                         url:'/Bigarray/clients',
-                        data:{'filter':'sari'},
+                        data:{'filter':param},
                         dataType:'json',
                         type:'post'
                     })
@@ -41,6 +43,11 @@
                     .fail(function(err){
                         console.log(err);
                     });
+                }
+                main();
+                $('#save').click(function(){
+                    main($('#padiText').val());
+                });
             }(jQuery))
         </script>
     </body>
