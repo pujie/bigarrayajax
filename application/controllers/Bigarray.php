@@ -23,4 +23,7 @@ class Bigarray extends CI_Controller{
     function ajaxwithtimesegment(){
         $this->load->view('ajaxwithtimesegment');
     }
+    function combobox(){
+        $this->load->view('combobox');
+    }
 }
