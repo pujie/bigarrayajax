@@ -18,14 +18,16 @@
                     var maxtime = 200;
                     $.ajax({
                         url:'/Bigarray/clients',
-                        dataType:'json'
+                        data:{'filter':'sari'},
+                        dataType:'json',
+                        type:'post'
                     })
                     .done(function(res){
                         fillcombo = function(lres,pr){
                             setTimeout(function(){
                             do{
                                 obj = lres.shift();
-                                pr('NAME '+obj.name);
+                                pr(obj.name);
                             }while(lres.length>0 && endTime > +new Date());
                             if(lres.length>0){
                                 setTimeout(arguments.callee,20);

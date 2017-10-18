@@ -9,10 +9,11 @@ class Bigarray extends CI_Controller{
         }
     }
     function clients(){
+        $params = $this->input->post();
         $this->load->model('Data');
         $arr = array();
         $objs = new Data();
-        foreach($objs->clients() as $obj){
+        foreach($objs->clients($params['filter']) as $obj){
             array_push ($arr,'{"id":"'.$obj->id.'","name":"'.$obj->name.'"}');
         }
         echo "[".implode(',',$arr)."]";
