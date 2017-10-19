@@ -8,6 +8,12 @@ class Bigarray extends CI_Controller{
             array_push($arr,$c);
         }
     }
+    function ajaxwithtimesegment(){
+        $this->load->view('ajaxwithtimesegment');
+    }
+    function autocomplete(){
+        $this->load->view('autocomplete');
+    }
     function clients(){
         $params = $this->input->post();
         $this->load->model('Data');
@@ -21,10 +27,10 @@ class Bigarray extends CI_Controller{
     function index(){
         $this->load->view('ajax');
     }
-    function ajaxwithtimesegment(){
-        $this->load->view('ajaxwithtimesegment');
-    }
     function combobox(){
         $this->load->view('combobox');
+    }
+    function test(){
+        $this->load->view('test');
     }
 }
