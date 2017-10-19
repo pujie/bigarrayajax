@@ -5,9 +5,10 @@
     </head>
     <body>
         <input type='text' id='padiText' />
-		<button id='save'> >> </button>
+		<button id='save'> start </button>
+		<button id='stop'> stop </button>
 		<ul id='result'>
         </ul>
-        <script type='text/javascript' src='/assets/padi.autocomplete.js'></script>
+        <script type='text/javascript' src='/assets/padi.autocomplete2.js'></script>
     </body>
 </html>
