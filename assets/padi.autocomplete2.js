@@ -1,33 +1,37 @@
 (function($){
-    //var continueLoop = true;
     var obj = {
         continueLoop:true,
-        fillcombo : function(dataArray,doProcess,result){
-            console.log('Process begin !!!');
+        objdata:[],
+        fillcombo : function(doProcess,result){
             var endTime = +new Date()+maxtime,maxtime = 200;
             setTimeout(function(){
                 do{
                     if(!obj.continueLoop){
                         break;
                     }
-                    obj_ = dataArray.shift();
+                    obj_ = obj.objdata.shift();
                     doProcess(result,obj_.name);
-                }while(dataArray.length>0 && endTime > +new Date() );
-                if(dataArray.length>0){
+                }while(obj.objdata.length>0 && endTime > +new Date() );
+                if(obj.objdata.length>0){
                     setTimeout(arguments.callee,20);
-                    //setTimeout(obj.fillcombo(dataArray,doProcess,result),20);
                 }else{
                     console.log('Sampun');
                 }
             },20);
         },
         stopfill:function(){
-            console.log('Process Stopped !!!    ');
             obj.continueLoop = false;
         },
         continuefill:function(){
             console.log('Process Run');
             obj.continueLoop=true;
+        },
+        emptyresult:function(result){
+            console.log('Empty Result');
+            result.empty()
+        },
+        setData:function(_data){
+            obj.objdata = _data;
         }
     }
     process = function(result,str){
@@ -39,7 +43,9 @@
         },options);
         that = $(this);
         that.keyup(function(){
+            obj.stopfill();
             settings.result.empty();
+
             $.ajax({
                 url:'/Bigarray/clients',
                 data:{'filter':that.val()},
@@ -47,9 +53,9 @@
                 type:'post'
             })
             .done(function(res){
-                //make sure existing loop stop here
+                obj.setData(res);
                 obj.continuefill();
-                obj.fillcombo(res,process,settings.result);
+                obj.fillcombo(process,settings.result);
             })
             .fail(function(err){
                 console.log(err);
@@ -59,8 +65,12 @@
     $('#padiText').makeAutoComplete({
         result:$('#result'),
     });
+    $('#start').click(function(){
+        obj.continuefill();
+        obj.fillcombo(process,$('#result'));
+    });
     $('#stop').click(function(){
-        //continueLoop = false;
         obj.stopfill();
+        obj.emptyresult();
     });
 }(jQuery))
