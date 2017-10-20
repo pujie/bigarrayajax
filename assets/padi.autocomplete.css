@@ -1,11 +1,12 @@
 .padiautocompleteresult{
-    background: turquoise;
-    position:absolute;
+    position: absolute;
     z-index: 100;
+    padding: 1px;
 }
 .padiautocompleteresult #result{
     list-style: none;
     background: yellowgreen;
+    margin: 1px;
 }
 .padiautocompleteresult #result .selected{
     background: red;

@@ -13,8 +13,8 @@
                     if(!obj.continueLoop){
                         break;
                     }
-                    obj_ = obj.objdata.shift();
-                    doProcess(result,obj_.name);
+                    item = obj.objdata.shift();
+                    doProcess(result,item);
                 }while(obj.objdata.length>0 && endTime > +new Date() );
                 if(obj.objdata.length>0){
                     setTimeout(arguments.callee,20);
@@ -41,8 +41,8 @@
             obj.maxrow = maxrow;
         }
     }
-    process = function(result,str){
-        result.prepend('<li>'+str+'</li>');
+    process = function(result,item){
+        result.prepend('<li id='+item.id+'>'+item.name+'</li>');
     }
     $.fn.makeAutoComplete = function(options){
         var settings = $.extend({
@@ -103,9 +103,11 @@
                     }
                     break;
                 case 27:
-                    console.log('Iam Emtptying result');
                     obj.emptyresult($('#result'));
-                    console.log('Emtptiying result');
+                break;
+                case 13:
+                    that.val(liSelected.html());
+                    obj.emptyresult($('#result'));
                 break;
             }
         })
