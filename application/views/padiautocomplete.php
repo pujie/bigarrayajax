@@ -5,6 +5,8 @@
         <script type='text/javascript' src='/vendors/padi.autocomplete.js'></script>
     </head>
     <body>
+        <h1>Padi AutoComplete</h1>
+        <h2>PadiNET textbox</h2>
         <input type='text' id='padiText' />
         <div class='padiautocompleteresult'>
     		<ul id='result'>

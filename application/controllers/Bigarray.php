@@ -33,4 +33,7 @@ class Bigarray extends CI_Controller{
     function test(){
         $this->load->view('test');
     }
+    function padiautocomplete(){
+        $this->load->view('padiautocomplete');
+    }
 }
