@@ -1,0 +1,8 @@
+.padiautocompleteresult{
+    background: turquoise;
+    position:absolute;
+    z-index: 100;
+}
+.padiautocompleteresult #result{
+    list-style: none;    
+}
