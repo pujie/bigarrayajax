@@ -4,5 +4,9 @@
     z-index: 100;
 }
 .padiautocompleteresult #result{
-    list-style: none;    
+    list-style: none;
+    background: yellowgreen;
+}
+.padiautocompleteresult #result .selected{
+    background: red;
 }

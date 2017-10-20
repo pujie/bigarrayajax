@@ -1,9 +1,13 @@
 (function($){
     var obj = {
         continueLoop:true,
+        maxrow:10,
         objdata:[],
         fillcombo : function(doProcess,result){
             var endTime = +new Date()+maxtime,maxtime = 200;
+            if(result.attr('display','hidden')){
+                result.show();
+            }
             setTimeout(function(){
                 do{
                     if(!obj.continueLoop){
@@ -28,10 +32,13 @@
         },
         emptyresult:function(result){
             console.log('Empty Result');
-            result.empty()
+            result.hide();
         },
         setData:function(_data){
             obj.objdata = _data;
+        },
+        setMaxRow:function(maxrow){
+            obj.maxrow = maxrow;
         }
     }
     process = function(result,str){
@@ -40,6 +47,7 @@
     $.fn.makeAutoComplete = function(options){
         var settings = $.extend({
             result:'',
+            maxrow:10,
         },options);
         that = $(this);
         that.on('input',function(){
@@ -53,6 +61,7 @@
             })
             .done(function(res){
                 obj.setData(res);
+                obj.setMaxRow(settings.maxrow);
                 obj.continuefill();
                 obj.fillcombo(process,settings.result);
             })
@@ -60,16 +69,48 @@
                 console.log(err);
             });
         });
+        var liSelected;
+        that.on('keyup',function(event){
+            $('#result li').each(function(){
+                $(this).removeClass('selected');
+            })
+            li = $('#result li');
+            switch(event.which){
+                case 40:
+                    if(liSelected){
+                        liSelected.removeClass('selected');
+                        next = liSelected.next();
+                        if(next.length>0){
+                            liSelected = next.addClass('selected');
+                        }else{
+                            liSelected = li.eq(0).addClass('selected');
+                        }
+                    }else{
+                        liSelected = li.eq(0).addClass('selected');
+                    }
+                break;
+                case 38:
+                    if(liSelected){
+                        liSelected.removeClass('selected');
+                        prev = liSelected.prev();
+                        if(prev.length>0){
+                            liSelected = prev.addClass('selected');
+                        }else{
+                            liSelected = li.last().addClass('selected');
+                        }
+                    }else{
+                        liSelected = li.last().addClass('selected');
+                    }
+                    break;
+                case 27:
+                    console.log('Iam Emtptying result');
+                    obj.emptyresult($('#result'));
+                    console.log('Emtptiying result');
+                break;
+            }
+        })
     }    
     $('#padiText').makeAutoComplete({
         result:$('#result'),
-    });
-    $('#start').click(function(){
-        obj.continuefill();
-        obj.fillcombo(process,$('#result'));
-    });
-    $('#stop').click(function(){
-        obj.stopfill();
-        obj.emptyresult();
     });
 }(jQuery))
