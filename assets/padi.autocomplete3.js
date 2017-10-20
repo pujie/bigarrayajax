@@ -107,6 +107,7 @@
                 break;
                 case 13:
                     that.val(liSelected.html());
+                    console.log('ID Selected : ',liSelected.attr('id'));
                     obj.emptyresult($('#result'));
                 break;
             }
